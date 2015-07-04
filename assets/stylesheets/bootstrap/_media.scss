@@ -23,12 +23,12 @@
 
 .media-right,
 .media > .pull-right {
-  padding-left: 10px;
+  @include padding-left(10px);
 }
 
 .media-left,
 .media > .pull-left {
-  padding-right: 10px;
+  @include padding-right(10px);
 }
 
 .media-left,
@@ -56,6 +56,6 @@
 //
 // Undo default ul/ol styles
 .media-list {
-  padding-left: 0;
+  @include padding-left(0);
   list-style: none;
 }

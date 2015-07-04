@@ -32,7 +32,7 @@
   @include clearfix;
 
   @media (min-width: $grid-float-breakpoint) {
-    float: left;
+    @include float(left);
   }
 }
 
@@ -161,7 +161,7 @@
 // Brand/project name
 
 .navbar-brand {
-  float: left;
+  @include float(left);
   padding: $navbar-padding-vertical $navbar-padding-horizontal;
   font-size: $font-size-large;
   line-height: $line-height-computed;
@@ -179,7 +179,7 @@
   @media (min-width: $grid-float-breakpoint) {
     .navbar > .container &,
     .navbar > .container-fluid & {
-      margin-left: -$navbar-padding-horizontal;
+      @include margin-left(-$navbar-padding-horizontal);
     }
   }
 }
@@ -192,7 +192,7 @@
 
 .navbar-toggle {
   position: relative;
-  float: right;
+  @include float(right);
   margin-right: $navbar-padding-horizontal;
   padding: 9px 10px;
   @include navbar-vertical-align(34px);
@@ -250,7 +250,7 @@
       box-shadow: none;
       > li > a,
       .dropdown-header {
-        padding: 5px 15px 5px 25px;
+        @include padding(5px, 15px, 5px, 25px);
       }
       > li > a {
         line-height: $line-height-computed;
@@ -264,11 +264,11 @@
 
   // Uncollapse the nav
   @media (min-width: $grid-float-breakpoint) {
-    float: left;
+    @include float(left);
     margin: 0;
 
     > li {
-      float: left;
+      @include float(left);
       > a {
         padding-top:    $navbar-padding-vertical;
         padding-bottom: $navbar-padding-vertical;
@@ -360,7 +360,7 @@
   @include navbar-vertical-align($line-height-computed);
 
   @media (min-width: $grid-float-breakpoint) {
-    float: left;
+    @include float(left);
     margin-left: $navbar-padding-horizontal;
     margin-right: $navbar-padding-horizontal;
   }
@@ -377,14 +377,14 @@
 
 @media (min-width: $grid-float-breakpoint) {
   .navbar-left {
-    float: left !important;
+    @include float(left !important);
   }
   .navbar-right {
-    float: right !important;
-  margin-right: -$navbar-padding-horizontal;
+    @include float(right !important);
+    @include margin-right(-$navbar-padding-horizontal);
 
     ~ .navbar-right {
-      margin-right: 0;
+      @include margin-right(0);
     }
   }
 }

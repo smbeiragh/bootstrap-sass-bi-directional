@@ -45,15 +45,15 @@
   }
 
   .list-group-item > & {
-    float: right;
+    @include float(right);
   }
 
   .list-group-item > & + & {
-    margin-right: 5px;
+    @include margin-right(5px);
   }
 
   .nav-pills > li > a > & {
-    margin-left: 3px;
+    @include margin-left(3px);
   }
 }
 
