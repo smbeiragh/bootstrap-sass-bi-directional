@@ -102,6 +102,11 @@ class Converter
               // [converter] This is because some asset helpers, such as Sprockets, do not work with file-relative paths.
               \\1: if($bootstrap-sass-asset-helper, "bootstrap/", "\\2bootstrap/") \\3;
             SCSS
+          when 'breadcrumbs.less'
+            file = replace_all file, /(.*)(\\00a0)/, unindent(<<-SCSS, 8) + "\\1\#{$nbsp}"
+              // [converter] Workaround for https://github.com/sass/libsass/issues/1115
+              $nbsp: "\\2";
+            SCSS
           when 'close.less'
             # extract .close { button& {...} } rule
             file = extract_nested_rule file, 'button&'
@@ -118,10 +123,10 @@ class Converter
             file = replace_all file, /(\s*)\.navbar-(right|left)\s*\{\s*@extend\s*\.pull-(right|left);\s*/, "\\1.navbar-\\2 {\\1  float: \\2 !important;\\1"
           when 'tables.less'
             file = replace_all file, /(@include\s*table-row-variant\()(\w+)/, "\\1'\\2'"
-          when 'thumbnails.less', 'labels.less', 'badges.less'
+          when 'thumbnails.less', 'labels.less', 'badges.less', 'buttons.less'
             file = extract_nested_rule file, 'a&'
           when 'glyphicons.less'
-            file = replace_rules(file, '@font-face') { |rule|
+            file = replace_rules(file, /\s*@font-face/) { |rule|
               rule = replace_all rule, /(\$icon-font(?:-\w+)+)/, '#{\1}'
               replace_asset_url rule, :font
             }
@@ -169,7 +174,14 @@ class Converter
       file   = deinterpolate_vararg_mixins(file)
       file   = replace_calculation_semantics(file)
       file   = replace_file_imports(file)
+      file   = wrap_at_groups_with_at_root(file)
       file
+    end
+
+    def wrap_at_groups_with_at_root(file)
+      replace_rules(file, /@(?:font-face|-ms-viewport)/) { |rule, _pos|
+        %Q(@at-root {\n#{indent rule, 2}\n})
+      }
     end
 
     def sass_fn_exists(fn)
