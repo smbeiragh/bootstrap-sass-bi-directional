@@ -65,7 +65,7 @@
 
 // [converter] This is defined recursively in LESS, but Sass supports real loops
 @mixin loop-grid-columns($columns, $class, $type) {
-  @for $i from 0 through $columns {
+  @for $i from $columns through 0 {
     @include calc-grid-column($i, $class, $type);
   }
 }
