@@ -1,6 +1,6 @@
 {
-  "name": "bootstrap-sass",
-  "homepage": "https://github.com/twbs/bootstrap-sass",
+  "name": "bootstrap-sass-bi-directional",
+  "homepage": "https://github.com/smbeiragh/bootstrap-sass-bi-directional",
   "authors": [
     "Thomas McDonald",
     "Tristan Harward",
@@ -30,7 +30,8 @@
     "Gemfile"
   ],
   "dependencies": {
-    "jquery": ">= 1.9.0"
+    "jquery": ">= 1.9.0",
+    "bi-app-sass": ">= 1.1.0"
   },
   "version": "3.3.6"
 }
